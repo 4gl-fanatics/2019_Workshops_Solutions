@@ -1,0 +1,15 @@
+*.r
+*.svn
+*.pct
+*.dbconnection
+protrace*.*
+procore*.*
+results.xml
+profiler/
+**/DBI*
+**/lbia*
+**/rcd*
+**/srta*
+debugger.pref
+*.e
+.pct/
