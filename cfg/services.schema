@@ -1,0 +1,65 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "Schema for services.json file, v. 1.0.0",
+    "definitions": {
+        "typeName": {
+            "type": "string",
+            "description": "An OOABL type name",
+            "pattern": "^[A-Za-z]+[A-Za-z$0-9-&#%.]+[A-Za-z$0-9-&#%]*$"
+        },
+        "provider": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "$ref": "#/definitions/typeName",
+                    "description": "Must implement 4GlFanatics.ServiceManager.IProvider"
+                },
+                "context": {
+                    "type": ["null","string","object","array","number","boolean"],
+                    "description": "The format of the context depends on the provider implementation"
+                }
+            },
+            "required": ["type"]
+        }
+    },
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "service": {"$ref": "#/definitions/typeName"},
+            "implementation": {
+                "oneOf": [
+                    {
+                        "type": "null",
+                        "description": "If null the service value is used as the implementation"
+                    },
+                    {
+                        "$ref": "#/definitions/typeName",
+                        "description": "Must implement the type represented by the 'service' property"
+                    }
+                ]
+            },
+            "alias": {"type": ["null","string"]},
+            "scope": {
+                "oneOf": [
+                    {"type": "null"},
+                    {
+                        "$ref": "#/definitions/typeName",
+                        "description":"Must implement Ccs.ServiceManager.ILifecycleScope or it's children"
+                    }
+                ]
+            },
+            "provider": {
+                "oneOf": [
+                    {"type": "null"},
+                    {
+                        "$ref": "#/definitions/typeName",
+                        "description": "Must implement 4GlFanatics.ServiceManager.IProvider"
+                    },
+                    {"$ref": "#/definitions/provider"}
+                ]
+            }
+        },
+        "required": ["service"]
+    }
+}
