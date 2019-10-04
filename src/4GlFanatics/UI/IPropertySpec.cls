@@ -12,6 +12,10 @@ means.
     Author(s)   : pjudge
     Notes       : 
   ----------------------------------------------------------------------*/
-interface 4GlFanatics.UI.IPropertySpec:  
-  
+interface 4GlFanatics.UI.IPropertySpec:
+    
+    define public property Name as character no-undo get. set.  
+    define public property Label as character no-undo get. set.
+    define public property ControlType as character no-undo get. set.
+
 end interface.

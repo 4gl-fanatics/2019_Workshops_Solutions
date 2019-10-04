@@ -17,5 +17,9 @@ block-level on error undo, throw.
 using 4GlFanatics.UI.IPropertySpec.
 
 class Test.PropSpec implements IPropertySpec: 
-
+    
+    define public property Name as character no-undo get. set.  
+    define public property Label as character no-undo get. set.
+    define public property ControlType as character no-undo get. set.
+    
 end class.

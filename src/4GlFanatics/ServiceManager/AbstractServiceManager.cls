@@ -16,6 +16,7 @@ block-level on error undo, throw.
 
 using 4GlFanatics.ServiceManager.IProvider.
 using 4GlFanatics.ServiceManager.Provider.DefaultConstructorProvider.
+using 4GlFanatics.ServiceManager.Scope.ServiceManagerScope.
 using Ccs.Common.IService.
 using Ccs.Common.IServiceManager.
 using Ccs.ServiceManager.IContainerScope.
@@ -24,7 +25,6 @@ using Ccs.ServiceManager.IRequestScope.
 using Ccs.ServiceManager.ISessionScope.
 using Ccs.ServiceManager.ITransientScope.
 using OpenEdge.Core.Assert.
-using 4GlFanatics.ServiceManager.Scope.ServiceManagerScope.
 
 class 4GlFanatics.ServiceManager.AbstractServiceManager abstract
                 implements IServiceManager:
@@ -37,8 +37,7 @@ class 4GlFanatics.ServiceManager.AbstractServiceManager abstract
         field svcName  as character
         field svcAlias as character initial ?
         field svcScope as integer   initial 1   //TRANSIENT
-        
-        field impl    as Progress.Lang.Object   serialize-hidden
+        field impl     as Progress.Lang.Object
         
         index idx1 svcName svcAlias svcScope
         index idx2 svcScope
@@ -107,8 +106,8 @@ class 4GlFanatics.ServiceManager.AbstractServiceManager abstract
         case true:
             when pScopeType:IsA(get-class(ITransientScope)) then return  1.
             when pScopeType:IsA(get-class(IRequestScope))   then return  2.
-            when pScopeType:IsA(get-class(ISessionScope))   then return  3.
-            when pScopeType:IsA(get-class(IContainerScope)) then return  4.
+            when pScopeType:IsA(get-class(IContainerScope)) then return  3.
+            when pScopeType:IsA(get-class(ISessionScope))   then return  4.
             otherwise                                            return  5.
         end.
         else
@@ -120,8 +119,8 @@ class 4GlFanatics.ServiceManager.AbstractServiceManager abstract
        If an alias is provided then we look for service+alias
        
        Scope breadth is (in decreasing order)
-                Ccs.ServiceManager.IContainerScope
                 Ccs.ServiceManager.ISessionScope
+                Ccs.ServiceManager.IContainerScope
                 Ccs.ServiceManager.IRequestScope
                 Ccs.ServiceManager.ITransientScope (same as no scope)
        If a scope is provided, look for a service of that scope or broader. 
@@ -189,10 +188,10 @@ class 4GlFanatics.ServiceManager.AbstractServiceManager abstract
     method abstract public Progress.Lang.Object getService(input pService as Progress.Lang.Class).
     
     method abstract public Progress.Lang.Object getService(input pService as Progress.Lang.Class,
-                                                           input pScope as ILifecycleScope ).
+                                                           input pScope as ILifecycleScope).
     
     method abstract public Progress.Lang.Object getService(input pService as Progress.Lang.Class,
-                                                           input pAlias as character ).
+                                                           input pAlias as character).
     
     method public void stopServices( input pScope as ILifecycleScope ):
         define variable scopeIdx as integer no-undo.
@@ -205,8 +204,8 @@ class 4GlFanatics.ServiceManager.AbstractServiceManager abstract
         case true:
             when type-of(pScope, ITransientScope) then scopeIdx = 1.
             when type-of(pScope, IRequestScope)   then scopeIdx = 2.
-            when type-of(pScope, ISessionScope)   then scopeIdx = 3.
-            when type-of(pScope, IContainerScope) then scopeIdx = 4.
+            when type-of(pScope, IContainerScope) then scopeIdx = 3.
+            when type-of(pScope, ISessionScope)   then scopeIdx = 4.
             otherwise                                  scopeIdx = 5.
         end.
         

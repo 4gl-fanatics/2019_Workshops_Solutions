@@ -29,20 +29,21 @@ using Progress.Json.ObjectModel.ObjectModelParser.
 
 class 4GlFanatics.ServiceManager.ConfigFileSvcMgr inherits AbstractServiceManager:
     
-    // this can easily be made into an ENUM
+    // this could be made into an ENUM
     define private variable mClientType as character no-undo.
     
-    //this data can come from a file, from a DB table 
+    //this data can come from a file, from a DB table
     define private temp-table svcRegistry no-undo
-        field svcName  as character
-        field svcAlias as character initial ?
-        field svcScope as character
-        field implType as character
-        field providerType as character  initial ?
+        field svcName         as character
+        field svcAlias        as character initial ?
+        field svcScope        as character
+        field implType        as character
+        field providerType    as character initial ?
         field providerContext as Progress.Lang.Object
         
         index idx1 svcName svcAlias svcScope. 
     
+    /* Default contructor */
     constructor public ConfigFileSvcMgr():
         if session:client-type eq '4GLCLIENT' then
         case session:window-system:
@@ -57,7 +58,7 @@ class 4GlFanatics.ServiceManager.ConfigFileSvcMgr inherits AbstractServiceManage
     
     /* Constructor 
        
-       @param character The client type for which to find services. This CTOR allows mocking etc */   
+       @param character The client type for which to find services. This CTOR allows mocking etc */
     constructor public ConfigFileSvcMgr(input pClientType as character):
         super(). 
         
@@ -172,14 +173,14 @@ class 4GlFanatics.ServiceManager.ConfigFileSvcMgr inherits AbstractServiceManage
             find pRegistry
             where pRegistry.svcName  eq pService:TypeName
               and pRegistry.svcAlias eq pAlias
-              and pRegistry.svcScope eq get-class(ISessionScope):TypeName
+              and pRegistry.svcScope eq get-class(IContainerScope):TypeName
             no-error.
         
         if not available pRegistry then
             find pRegistry
             where pRegistry.svcName  eq pService:TypeName
               and pRegistry.svcAlias eq pAlias
-              and pRegistry.svcScope eq get-class(IContainerScope):TypeName
+              and pRegistry.svcScope eq get-class(ISessionScope):TypeName
             no-error.
         
         if not available pRegistry then
@@ -230,7 +231,7 @@ class 4GlFanatics.ServiceManager.ConfigFileSvcMgr inherits AbstractServiceManage
         
         define buffer registry for svcRegistry.
         
-        FindRegistry(pService, ?, buffer registry).
+        FindRegistry(pService, pAlias, buffer registry).
         if not available registry then
             return svc.
         

@@ -1,10 +1,10 @@
-[
+ [
     {
         "service": "4GlFanatics.UI.IInputFormHelper",
         "implementation": "Test.InputFormHelper",
         "alias": null,
         "scope": "Ccs.ServiceManager.ISessionScope",
-        "provider": { 
+        "provider": {
             "type": "4GlFanatics.ServiceManager.Provider.ConfiguredConstructorProvider",
             "context": [
                 "4GlFanatics.UI.IInputValidator",
@@ -12,10 +12,13 @@
                     "type": "4GlFanatics.UI.IPropertySpec",
                     "isArray": true,
                     "value": [
-                        "4GlFanatics.UI.IPropertySpec",
                         {
                             "service": "4GlFanatics.UI.IPropertySpec",
-                            "alias": "other"
+                            "alias": "one"
+                        },
+                        {
+                            "service": "4GlFanatics.UI.IPropertySpec",
+                            "alias": "three"
                         }
                     ]
                 }
@@ -32,5 +35,44 @@
         "implementation": "Test.PropSpec",
         "scope": null,
         "provider": null
+    },
+    {
+        "service": "4GlFanatics.UI.IPropertySpec",
+        "implementation": "Test.PropSpec",
+        "alias": "one",
+        "provider": {
+            "type": "4GlFanatics.ServiceManager.Provider.PropertySpecProvider",
+            "context": {
+                "name": "one",
+                "label": "First",
+                "controlType": "wiz"
+            }
+        }
+    },
+    {
+        "service": "4GlFanatics.UI.IPropertySpec",
+        "implementation": "Test.PropSpec",
+        "alias": "two",
+        "provider": {
+            "type": "4GlFanatics.ServiceManager.Provider.PropertySpecProvider",
+            "context": {
+                "name": "two",
+                "label": "Second",
+                "controlType": "bang"
+            }
+        }
+    },
+    {
+        "service": "4GlFanatics.UI.IPropertySpec",
+        "implementation": "Test.PropSpec",
+        "alias": "three",
+        "provider": {
+            "type": "4GlFanatics.ServiceManager.Provider.PropertySpecProvider",
+            "context": {
+                "name": "three",
+                "label": "Third",
+                "controlType": "boom"
+            }
+        }
     }
 ]
