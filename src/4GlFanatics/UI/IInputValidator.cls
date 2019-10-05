@@ -11,10 +11,19 @@ means.
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    Author(s)   : Mike Fechner / Consultingwerk Ltd.
     Created     : Thu Oct 03 09:08:28 EDT 2019
     Notes       : 
   ----------------------------------------------------------------------*/
-interface 4GlFanatics.UI.IInputValidator:  
+  
+INTERFACE 4GlFanatics.UI.IInputValidator:  
 
-end interface.
+    /**
+     * Purpose: Validates the properties of the given value object
+     * Notes:
+     * @param poValueObject The value object to validate
+     * @return Logical value indicating if the object's properties are valid
+     */
+    METHOD PUBLIC LOGICAL IsValid (poValueObject AS Progress.Lang.Object).
+
+END INTERFACE.

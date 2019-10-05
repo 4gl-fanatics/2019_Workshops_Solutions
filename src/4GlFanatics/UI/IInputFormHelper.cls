@@ -7,11 +7,19 @@ binary, for any purpose, commercial or non-commercial, and by any
 means.
 */
 /*------------------------------------------------------------------------
-    File        : IUiHelper
+    File        : IInputFormHelper
     Description : 
-    Author(s)   : pjudge
+    Author(s)   : Mike Fechner / Consultingwerk Ltd.
     Notes       : 
   ----------------------------------------------------------------------*/
-interface 4GlFanatics.UI.IInputFormHelper:  
 
-end interface.
+USING 4GlFanatics.UI.*  FROM PROPATH .
+
+INTERFACE 4GlFanatics.UI.IInputFormHelper:  
+
+    METHOD PUBLIC DialogResultEnum PerformInput (pcTitle AS CHARACTER,
+                                                 poValueObject AS Progress.Lang.Object,
+                                                 poPropertySpecs AS IPropertySpec EXTENT,
+                                                 poValidator AS IInputValidator).
+
+END INTERFACE.

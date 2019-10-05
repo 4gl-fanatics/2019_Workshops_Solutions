@@ -14,12 +14,13 @@ means.
   ----------------------------------------------------------------------*/
 block-level on error undo, throw.
 
-using 4GlFanatics.UI.IPropertySpec.
+USING 4GlFanatics.UI.* FROM PROPATH.
 
 class Test.PropSpec implements IPropertySpec: 
     
     define public property Name as character no-undo get. set.  
     define public property Label as character no-undo get. set.
-    define public property ControlType as character no-undo get. set.
+    define public property ControlType as ControlTypeEnum no-undo get. set.
+    define public property ReadOnly as logical no-undo get. set.
     
 end class.

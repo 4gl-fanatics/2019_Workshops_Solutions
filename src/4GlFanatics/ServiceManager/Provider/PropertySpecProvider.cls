@@ -20,6 +20,7 @@ using Ccs.Common.IService.
 using OpenEdge.Core.Assert.
 using Progress.Json.ObjectModel.JsonDataType.
 using Progress.Json.ObjectModel.JsonObject.
+USING 4GlFanatics.UI.* FROM PROPATH.
 
 class 4GlFanatics.ServiceManager.Provider.PropertySpecProvider implements IProvider: 
     
@@ -64,7 +65,7 @@ class 4GlFanatics.ServiceManager.Provider.PropertySpecProvider implements IProvi
         if     ctx:Has('controlType')
            and ctx:GetType('controlType') eq JsonDataType:STRING
         then
-            cast(svc, IPropertySpec):ControlType =ctx:GetCharacter('controlType').
+            cast(svc, IPropertySpec):ControlType = ControlTypeEnum:GetEnum(ctx:GetCharacter('controlType')) .
         
         if type-of(svc, IService) then
             cast(svc, IService):initialize().
