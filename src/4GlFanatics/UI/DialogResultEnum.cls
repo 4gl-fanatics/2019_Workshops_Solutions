@@ -7,19 +7,19 @@ binary, for any purpose, commercial or non-commercial, and by any
 means.
 */
 /*------------------------------------------------------------------------
-    File        : IPropertySpec
+    File        : DialogResultEnum
+    Purpose     : 
+    Syntax      : 
     Description : 
-    Author(s)   : pjudge
+    Author(s)   : Mike Fechner / Consultingwerk Ltd.
+    Created     : Sat Oct 05 12:04:19 CEST 2019
     Notes       : 
   ----------------------------------------------------------------------*/
-  
-USING 4GlFanatics.UI.* FROM PROPATH . 
-  
-INTERFACE 4GlFanatics.UI.IPropertySpec:
-    
-    DEFINE PUBLIC PROPERTY Name         AS CHARACTER       NO-UNDO GET. SET.  
-    DEFINE PUBLIC PROPERTY Label        AS CHARACTER       NO-UNDO GET. SET.
-    DEFINE PUBLIC PROPERTY ReadOnly     AS LOGICAL         NO-UNDO GET. SET.
-    DEFINE PUBLIC PROPERTY ControlType  AS ControlTypeEnum NO-UNDO GET. SET.
 
-END INTERFACE.
+ENUM 4GlFanatics.UI.DialogResultEnum :  
+
+    DEFINE ENUM OK 
+                Cancel 
+                Waiting .
+
+END ENUM.
