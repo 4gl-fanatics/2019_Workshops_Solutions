@@ -38,7 +38,8 @@ ASSIGN
     oParameter:DateFrom   = DATE (1, 1, YEAR (TODAY))
     oParameter:DateTo     = DATE (12, 31, YEAR (TODAY))
     oParameter:OutputFile = "report.pdf" .
-    
+
+/* to-do: replace with ServiceManager call */    
 oInputFormHelper = NEW GuiInputFormHelper () .
 
 oResult = oInputFormHelper:PerformInput ("Customer Report Parameters", 
