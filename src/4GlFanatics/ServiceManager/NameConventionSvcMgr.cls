@@ -24,8 +24,10 @@ class 4GlFanatics.ServiceManager.NameConventionSvcMgr inherits AbstractServiceMa
     /* Returns the implementation type for a requested service
        
        @param Progress.Lang.Class The service requested
+       @param character An alias
        @return Progress.Lang.Class The implementation type, based on the name of the service */
-    method protected Progress.Lang.Class getImplementationType(input pService as Progress.Lang.Class):
+    method protected Progress.Lang.Class getImplementationType(input pService as Progress.Lang.Class,
+                                                               input pAlias as character):
         define variable implType as Progress.Lang.Class no-undo.
         define variable className as character no-undo.
         
@@ -34,10 +36,11 @@ class 4GlFanatics.ServiceManager.NameConventionSvcMgr inherits AbstractServiceMa
         if     pService:IsInterface()
            and className begins 'I'
         then
-            implType = Progress.Lang.Class:GetClass(pService:Package + '.'
+            implType = Progress.Lang.Class:GetClass(pService:Package + '.implementation.'
                                                     // convert Ccs.ServiceManager.IRequestScope to RequestScope
-                                                    + substring(className, 2)).
-        else
+                                                    + caps(substring(className, 1, 1) + lc(substring(className, 2)) 
+                                                    + substring(className, 2))).
+        else 
             implType = pService.
         
         return implType.
@@ -53,7 +56,7 @@ class 4GlFanatics.ServiceManager.NameConventionSvcMgr inherits AbstractServiceMa
         if valid-object(svc) then
             return svc.
         
-        svc = getProvider(?):invokeService(getImplementationType(pService), ?).
+        svc = getProvider(?):invokeService(getImplementationType(pService, ?), ?).
         
         Assert:IsType(svc, pService).
         
@@ -73,7 +76,7 @@ class 4GlFanatics.ServiceManager.NameConventionSvcMgr inherits AbstractServiceMa
         if valid-object(svc) then
             return svc.
         
-        svc = getProvider(?):invokeService(getImplementationType(pService), ?).
+        svc = getProvider(?):invokeService(getImplementationType(pService, pAlias), ?).
         
         Assert:IsType(svc, pService).
         
@@ -93,7 +96,7 @@ class 4GlFanatics.ServiceManager.NameConventionSvcMgr inherits AbstractServiceMa
         if valid-object(svc) then
             return svc.
         
-        svc = getProvider(?):invokeService(getImplementationType(pService), ?).
+        svc = getProvider(?):invokeService(getImplementationType(pService, ?), ?).
         
         Assert:IsType(svc, pService).
         
