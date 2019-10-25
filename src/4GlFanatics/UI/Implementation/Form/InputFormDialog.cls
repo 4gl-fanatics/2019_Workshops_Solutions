@@ -24,6 +24,9 @@ USING Progress.Lang.*                                         FROM PROPATH .
 USING 4GlFanatics.UI.*                                        FROM PROPATH.
 USING 4GlFanatics.UI.Implementation.Form.*                    FROM PROPATH.
 USING 4GlFanatics.UI.Util.* FROM PROPATH.
+using Infragistics.Win.UltraWinEditors.UltraTextEditor.
+using Infragistics.Win.UltraWinEditors.UltraNumericEditor.
+using Infragistics.Win.UltraWinEditors.UltraDateTimeEditor.
 
 CLASS 4GlFanatics.UI.Implementation.Form.InputFormDialog
     INHERITS Progress.Windows.Form:
@@ -92,14 +95,11 @@ CLASS 4GlFanatics.UI.Implementation.Form.InputFormDialog
     ------------------------------------------------------------------------------*/
     METHOD PROTECTED System.Windows.Forms.Control CreateControl (poValueObjectType AS Progress.Lang.Class,
                                                                  poPropertySpec AS IPropertySpec):
-        
         DEFINE VARIABLE oFactory AS IGuiInputControlFactory      NO-UNDO.
         
-        /* To-do: Use ServiceManager */
-        oFactory = NEW GuiInputControlFactory () .
+        oFactory = {get-service.i IGuiInputControlFactory}.
 
         RETURN oFactory:CreateInputControl (poValueObjectType, poPropertySpec) .
-
     END METHOD.
 
     /**
@@ -258,11 +258,20 @@ CLASS 4GlFanatics.UI.Implementation.Form.InputFormDialog
 
         THIS-OBJECT:DisplayProperites() .
 
-        DO i = 1 TO EXTENT (poPropertySpecs):
+        IF VALID-OBJECT (poValidator) THEN
+        DO i = 1 TO EXTENT (poPropertySpecs):   
             oControl = CAST (CAST (oPropertyControls[i], Progress.Lang.Object),
                              System.Windows.Forms.Control) .
-
-            IF VALID-OBJECT (poValidator) THEN
+            // using VALUE-CHANGED makes it easier to get values
+            if type-of(oControl, UltraTextEditor) then
+                cast(oControl, UltraTextEditor):ValueChanged:Subscribe (TextChangedHandler) .
+            else
+            if type-of(oControl, UltraNumericEditor) then
+                cast(oControl, UltraNumericEditor):ValueChanged:Subscribe (TextChangedHandler) .
+            else
+            if type-of(oControl, UltraDateTimeEditor) then
+                cast(oControl, UltraDateTimeEditor):ValueChanged:Subscribe (TextChangedHandler) .
+            else
                 oControl:TextChanged:Subscribe (TextChangedHandler) .
         END.
 

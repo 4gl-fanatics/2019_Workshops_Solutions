@@ -1,0 +1,17 @@
+[
+    {
+        /* PROPERTIES WITH A NULL VALUE ARE OPTIONAL */
+        "service": "<ooabl-type-name>", 
+        "implementation": null | "<ooabl-type-name> must implement the service type",
+        "alias": null | "<alias>",
+        "scope": null | "<ooabl-type-name> must implement Ccs.ServiceManager.ILifecycleScope ",
+        "provider": null
+                  | "<ooabl-type-name> must implement 4GlFanatics.ServiceManager.IProvider" 
+                  | { 
+                        "type": "<ooabl-type-name> must implement 4GlFanatics.ServiceManager.IProvider",
+                        "context": null 
+                                 | <context-value> /* CONTEXT VARIES BY PROVIDER. The 4GlFanatics.ServiceManager.Provider.ConfiguredConstructorProvider source describes one such context */ 
+                   }
+    },
+    { /*service-2*/ }
+]

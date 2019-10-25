@@ -52,8 +52,7 @@ CLASS 4GlFanatics.UI.Implementation.Form.IntegerTextBoxInputControl
     METHOD PUBLIC VOID AssignPropertyValue (poObject AS Progress.Lang.Object,
                                             pcPropertyName AS CHARACTER):
 
-        DYNAMIC-PROPERTY (poObject, pcPropertyName) = TRIM (THIS-OBJECT:Text, THIS-OBJECT:PromptChar) .
-
+        DYNAMIC-PROPERTY (poObject, pcPropertyName) = unbox(this-object:Value).
     END METHOD.
 
     /**

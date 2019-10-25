@@ -18,13 +18,12 @@ means.
 
 BLOCK-LEVEL ON ERROR UNDO, THROW.
 
-USING 4GlFanatics.UI.*            FROM PROPATH .
-USING 4GlFanatics.UI.Validators.* FROM PROPATH .
-USING Progress.Lang.*             FROM PROPATH .
-USING OpenEdge.Core.*             FROM PROPATH .
-USING tests.Sample.*              FROM PROPATH .
+using 4GlFanatics.UI.IInputValidator.
+using 4GlFanatics.UI.Parameters.CustomerReportParameter.
+using 4GlFanatics.UI.Validators.DateRangeValidator.
+using OpenEdge.Core.Assert.
 
-CLASS tests.Sample.CustomerReportParameterValidator 
+CLASS 4GlFanatics.UI.Validators.CustomerReportParameterValidator 
     IMPLEMENTS IInputValidator: 
 
     DEFINE VARIABLE oDateRangeValidator AS DateRangeValidator NO-UNDO . 

@@ -7,13 +7,10 @@ binary, for any purpose, commercial or non-commercial, and by any
 means.
 */ 
 /*------------------------------------------------------------------------
-    File        : sample-call.p
+    File        : run-report.p
     Purpose     : 
-
     Syntax      :
-
     Description : 
-
     Author(s)   : Mike Fechner / Consultingwerk Ltd.
     Created     : Sat Oct 05 12:11:24 CEST 2019
     Notes       :
@@ -23,15 +20,22 @@ means.
 
 BLOCK-LEVEL ON ERROR UNDO, THROW.
 
-USING tests.Sample.*                  FROM PROPATH.
-USING 4GlFanatics.UI.*                FROM PROPATH.
-USING 4GlFanatics.UI.Implementation.* FROM PROPATH.
+using 4GlFanatics.UI.ControlTypeEnum.
+using 4GlFanatics.UI.DialogResultEnum.
+using 4GlFanatics.UI.IInputFormHelper.
+using 4GlFanatics.UI.IInputValidator.
+using 4GlFanatics.UI.Parameters.CustomerReportParameter.
+using 4GlFanatics.UI.PropertySpec.
 
 DEFINE VARIABLE oParameter       AS CustomerReportParameter NO-UNDO . 
-DEFINE VARIABLE oInputFormHelper AS IInputFormHelper        NO-UNDO . 
-DEFINE VARIABLE oResult          AS DialogResultEnum        NO-UNDO .  
+DEFINE VARIABLE oInputFormHelper AS IInputFormHelper        NO-UNDO .  
+DEFINE VARIABLE oValidator       AS IInputValidator         NO-UNDO .
+DEFINE VARIABLE oResult          AS DialogResultEnum        NO-UNDO .
+  
 
 /* ***************************  Main Block  *************************** */
+// starts and hooks up the service manager 
+run session_start.p.
 
 ASSIGN 
     oParameter            = NEW CustomerReportParameter () 
@@ -39,17 +43,17 @@ ASSIGN
     oParameter:DateTo     = DATE (12, 31, YEAR (TODAY))
     oParameter:OutputFile = "report.pdf" .
 
-/* to-do: replace with ServiceManager call */    
-oInputFormHelper = NEW GuiInputFormHelper () .
+oInputFormHelper = {get-service.i IInputFormHelper}.
+oValidator       = {get-service.i IInputValidator "CustomerReportParameter"}.
 
 oResult = oInputFormHelper:PerformInput ("Customer Report Parameters", 
                                          oParameter, 
                                          PropertySpec:Array (NEW PropertySpec ("CustomerFrom", "Customer From"),
                                                              NEW PropertySpec ("CustomerTo", "Customer To"),
-                                                             NEW PropertySpec ("DateFrom", "Date From"),
-                                                             NEW PropertySpec ("DateTo", "Date To"),
+                                                             NEW PropertySpec ("DateFrom", "Date From",     ControlTypeEnum:DateField),
+                                                             NEW PropertySpec ("DateTo", "Date To",         ControlTypeEnum:DateField),
                                                              NEW PropertySpec ("OutputFile", "Output File", ControlTypeEnum:FileNameSaveAs)), 
-                                         NEW CustomerReportParameterValidator ()) . 
+                                         oValidator) . 
 
 IF oResult <> DialogResultEnum:OK THEN 
     RETURN . 

@@ -16,12 +16,12 @@ means.
     Notes       : 
   ----------------------------------------------------------------------*/
 
-USING Progress.Lang.*.
-USING 4GlFanatics.UI.Validators.IHasDateRange.
 
 BLOCK-LEVEL ON ERROR UNDO, THROW.
 
-CLASS tests.Sample.CustomerReportParameter 
+using 4GlFanatics.UI.Validators.IHasDateRange.
+
+CLASS 4GlFanatics.UI.Parameters.CustomerReportParameter 
     IMPLEMENTS IHasDateRange: 
 
     DEFINE PUBLIC PROPERTY CustomerFrom AS INTEGER   NO-UNDO GET. SET. 

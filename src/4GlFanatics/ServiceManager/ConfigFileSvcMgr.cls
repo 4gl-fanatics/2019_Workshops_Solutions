@@ -189,6 +189,12 @@ class 4GlFanatics.ServiceManager.ConfigFileSvcMgr inherits AbstractServiceManage
               and pRegistry.svcAlias eq pAlias
               and pRegistry.svcScope eq get-class(ILifecycleScope):TypeName
             no-error.
+        
+        // ? and '' are equivalent
+        if not available pRegistry
+           and pAlias eq '':u
+        then
+            FindRegistry(pService, ?, buffer pRegistry).
     end method.
     
     method override public Progress.Lang.Object getService(input pService as Progress.Lang.Class):

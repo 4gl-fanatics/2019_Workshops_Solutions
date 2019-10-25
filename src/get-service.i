@@ -12,5 +12,5 @@ means.
     Description : 
     Author(s)   : pjudge
   ----------------------------------------------------------------------*/
-&endif  
-cast(Ccs.Common.Application:ServiceManager:getService(get-class({1})), {1})
+&endif
+cast(Ccs.Common.Application:ServiceManager:getService(get-class({1}), "{2}"), {1})

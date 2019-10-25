@@ -51,10 +51,7 @@ CLASS 4GlFanatics.UI.Implementation.Form.DateTextBoxInputControl
     METHOD PUBLIC VOID AssignPropertyValue (poObject AS Progress.Lang.Object,
                                             pcPropertyName AS CHARACTER):
 
-        
-
-        DYNAMIC-PROPERTY (poObject, pcPropertyName) = TRIM (THIS-OBJECT:Text, THIS-OBJECT:PromptChar) .
-
+        DYNAMIC-PROPERTY (poObject, pcPropertyName) = date(this-object:DateTime).
     END METHOD.
 
     /**
@@ -69,7 +66,7 @@ CLASS 4GlFanatics.UI.Implementation.Form.DateTextBoxInputControl
         DEFINE VARIABLE dtDate AS DATE NO-UNDO.
 
         dtDate = DYNAMIC-PROPERTY (poObject, pcPropertyName) .
-
+        
         THIS-OBJECT:Value = BOX (dtDate) .
 
     END METHOD.
