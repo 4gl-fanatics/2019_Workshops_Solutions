@@ -1,78 +1,14 @@
  [
     {
         "service": "4GlFanatics.UI.IInputFormHelper",
-        "implementation": "Test.InputFormHelper",
-        "alias": null,
-        "scope": "Ccs.ServiceManager.ISessionScope",
-        "provider": {
-            "type": "4GlFanatics.ServiceManager.Provider.ConfiguredConstructorProvider",
-            "context": [
-                "4GlFanatics.UI.IInputValidator",
-                {
-                    "type": "4GlFanatics.UI.IPropertySpec",
-                    "isArray": true,
-                    "value": [
-                        {
-                            "service": "4GlFanatics.UI.IPropertySpec",
-                            "alias": "one"
-                        },
-                        {
-                            "service": "4GlFanatics.UI.IPropertySpec",
-                            "alias": "three"
-                        }
-                    ]
-                }
-            ]
-        }
-    },
-    {
+        "implementation": "4GlFanatics.UI.Implementation.GuiInputFormHelper"
+   },{
         "service": "4GlFanatics.UI.IInputValidator",
-        "implementation": "Test.InputValidator",
-        "provider": "4GlFanatics.ServiceManager.Provider.LongestConstructorProvider"
-    },
-    {
-        "service": "4GlFanatics.UI.IPropertySpec",
-        "implementation": "Test.PropSpec",
-        "scope": null,
-        "provider": null
-    },
-    {
-        "service": "4GlFanatics.UI.IPropertySpec",
-        "implementation": "Test.PropSpec",
-        "alias": "one",
-        "provider": {
-            "type": "4GlFanatics.ServiceManager.Provider.PropertySpecProvider",
-            "context": {
-                "name": "one",
-                "label": "First",
-                "controlType": "wiz"
-            }
-        }
-    },
-    {
-        "service": "4GlFanatics.UI.IPropertySpec",
-        "implementation": "Test.PropSpec",
-        "alias": "two",
-        "provider": {
-            "type": "4GlFanatics.ServiceManager.Provider.PropertySpecProvider",
-            "context": {
-                "name": "two",
-                "label": "Second",
-                "controlType": "bang"
-            }
-        }
-    },
-    {
-        "service": "4GlFanatics.UI.IPropertySpec",
-        "implementation": "Test.PropSpec",
-        "alias": "three",
-        "provider": {
-            "type": "4GlFanatics.ServiceManager.Provider.PropertySpecProvider",
-            "context": {
-                "name": "three",
-                "label": "Third",
-                "controlType": "boom"
-            }
-        }
-    }
+        "alias": "CustomerReportParameter",
+        "implementation": "4GlFanatics.UI.Validators.CustomerReportParameterValidator"
+   },{
+        "service": "4GlFanatics.UI.Implementation.Form.IGuiInputControlFactory",
+        "alias": null,
+        "implementation": "4GlFanatics.UI.Implementation.Form.GuiInputControlFactory"
+   }
 ]
