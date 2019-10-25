@@ -11,7 +11,7 @@ means.
     Purpose     : 
     Syntax      : 
     Description : 
-    Author(s)   : Mike Fechner / Consulingwerk Ltd.
+    Author(s)   : Mike Fechner / Consultingwerk Ltd.
     Created     : Sat Oct 05 12:38:14 CEST 2019
     Notes       : 
   ----------------------------------------------------------------------*/
