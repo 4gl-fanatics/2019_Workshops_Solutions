@@ -1,13 +1,12 @@
 # 2019_Workshops_Solutions
 This project contains example solutions for the starting code in https://github.com/4gl-fanatics/2019_Workshops_Before .
 
+###  Input Form Helper
+The input form helper is a generic dialog that takes a parameters value object, a validator and an array of "property specs", that are used to define the UI widgets.
 
-### 1. Input Form Helper
 
-
-### 2. Service Manager
+###  Service Manager
 There are a couple of Service Manager implementations in this project, along with support code.
-
 
 Additional file name | Commments 
 ---- | ----
