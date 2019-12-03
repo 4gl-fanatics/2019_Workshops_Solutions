@@ -201,14 +201,8 @@ class 4GlFanatics.ServiceManager.AbstractServiceManager abstract
         define buffer cache for serviceCache.
         define query qryCache for cache.
         
-        case true:
-            when type-of(pScope, ITransientScope) then scopeIdx = 1.
-            when type-of(pScope, IRequestScope)   then scopeIdx = 2.
-            when type-of(pScope, IContainerScope) then scopeIdx = 3.
-            when type-of(pScope, ISessionScope)   then scopeIdx = 4.
-            otherwise                                  scopeIdx = 5.
-        end.
-        
+        scopeIdx = getScopeIndex(pScope).
+                
         open query qryCache preselect each cache where cache.svcScope eq scopeIdx.
         
         get first qryCache.
